@@ -1,0 +1,20 @@
+ncc:
+  config:
+    url: http://nc.gtcloud.cn/service/XChangeServlet?account=001&groupcode=001
+    sendUrl: http://cw.gtcloud.cn/abs_platform/abs/api.json
+    certUrl: http://nc.gtcloud.cn/service/QueryPaymentSlipCertificate
+    smsUrl: http://114.55.53.120/smsJson.aspx
+server:
+  port: 9999
+spring:
+  datasource:
+    url: jdbc:mysql://172.16.250.14:3306/finetube?useSSL=false
+    username: wangqy
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+
+
+
+
+
+
