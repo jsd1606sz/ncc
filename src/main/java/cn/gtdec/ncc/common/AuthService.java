@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,12 @@ import java.util.Map;
  * 获取token类
  */
 public class AuthService {
-
+    //主动调用的access_token
+    public static String access_token;
+    //主动调用的请求时间
+    public static Date access_token_date;
+    //token的有效时间，默认7200，用于判断是否超时，考虑网络延迟是的减小
+    public static long accessTokenInvalidTime=7200L;
     /**
      * 获取权限token
      * @return 返回示例：
@@ -27,7 +33,13 @@ public class AuthService {
         String clientId = "arIIsAsKAPdWOtAjzTpmFNLB";
         // 官网获取的 Secret Key 更新为你注册的
         String clientSecret = "vg8QdkaXESWhASlXcmBtqycUNsDoAzld";
-        return getAuth(clientId, clientSecret);
+        String token="";
+        if(null==access_token||"".equals(access_token)||(new Date().getTime()-access_token_date.getTime())>=(accessTokenInvalidTime-200L)){
+            token = getAuth(clientId, clientSecret);
+        }else{
+            token = access_token;
+        }
+        return token;
     }
 
     /**
@@ -73,6 +85,8 @@ public class AuthService {
             System.err.println("result:" + result);
             JSONObject jsonObject = JSONObject.parseObject(result);
             String access_token = jsonObject.getString("access_token");
+            accessTokenInvalidTime=Long.valueOf(jsonObject.get("expires_in")+"");
+            access_token_date=new Date();
             return access_token;
         } catch (Exception e) {
             System.err.printf("获取token失败！");
