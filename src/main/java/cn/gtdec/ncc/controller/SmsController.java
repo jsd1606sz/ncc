@@ -20,16 +20,17 @@ public class SmsController {
     @ApiOperation(value = "sendSms", notes = "发送短信通知接口")
     @ResponseBody
     @RequestMapping(value = "/sendSms", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public JSONObject queryCertNum(@ApiParam("发送短信通知") @RequestBody JSONObject jsonParams){
+    public JSONObject queryCertNum(@ApiParam("发送短信通知") @RequestBody JSONObject jsonParamsOrg){
+        JSONObject jsonParams=jsonParamsOrg.getJSONObject("data");
         System.out.println(jsonParams.toJSONString());
         JSONObject infos = new JSONObject();
         //检查参数docId|billType是否都存在
-        if(jsonParams.containsKey("mobile") && jsonParams.containsKey("msgInfo")){
+        if(jsonParams.containsKey("mobile") && jsonParams.containsKey("msginfo")){
             //检查参数docId|billType是否为空
-            if(jsonParams.getString("mobile").isEmpty() || jsonParams.getString("msgInfo").isEmpty()) {
+            if(jsonParams.getString("mobile").isEmpty() || jsonParams.getString("msginfo").isEmpty()) {
                 infos.put("resultcode","0");
                 infos.put("content","");
-                infos.put("resultdescription","参数mobile|msgInfo不能为空");
+                infos.put("resultdescription","参数mobile|msginfo不能为空");
             }else{
                 infos = smsService.sendMessageBySMS(jsonParams);
             }

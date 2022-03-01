@@ -15,6 +15,8 @@ public class ConnectUtil {
     private String certUrl;
     @Value("${ncc.config.smsUrl}")
     private String smsUrl;
+    @Value("${ncc.config.sendUrl}")
+    private String sendUrl;
 
     @RequestMapping("/getUrl")
     public String getUrl(){
@@ -32,5 +34,11 @@ public class ConnectUtil {
     public String getSmsUrl(){
         String smsUrl = this.smsUrl;
         return smsUrl;
+    }
+
+    @RequestMapping("/getSendUrl")
+    public String getSendUrl(){
+        String sendUrl = this.sendUrl;
+        return sendUrl;
     }
 }

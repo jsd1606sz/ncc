@@ -20,7 +20,8 @@ public class CertController {
     @ApiOperation(value = "queryCertNum", notes = "查询凭证信息接口")
     @ResponseBody
     @RequestMapping(value = "/queryCertNum", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public JSONObject queryCertNum(@ApiParam("获取凭证信息") @RequestBody JSONObject jsonParams){
+    public JSONObject queryCertNum(@ApiParam("获取凭证信息") @RequestBody JSONObject jsonParamsOrg){
+        JSONObject jsonParams=jsonParamsOrg.getJSONObject("data");
         System.out.println(jsonParams.toJSONString());
         JSONObject infos = new JSONObject();
         //检查参数docId|billType是否都存在

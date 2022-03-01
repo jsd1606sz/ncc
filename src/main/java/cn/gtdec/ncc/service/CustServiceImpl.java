@@ -28,7 +28,7 @@ public class CustServiceImpl implements CustService {
     public JSONObject getCustNum(JSONObject json){
         System.out.println(conn.getUrl());
         String url = conn.getUrl();
-        String data = getXMLString(json.getString("cmpName"),json.getString("supplierclass"),json.getString("iscustomer"),json.getString("taxpayerid"));
+        String data = getXMLString(json.getString("cmpname"),json.getString("supplierclass"),json.getString("iscustomer"),json.getString("taxpayerid"));
         JSONObject infos = null;
         try {
             infos = pushSupper(url,data);

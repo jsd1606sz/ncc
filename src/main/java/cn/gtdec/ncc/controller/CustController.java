@@ -18,7 +18,8 @@ public class CustController {
     @ApiOperation(value = "queryCustNum", notes = "查询客商编号接口")
     @ResponseBody
     @RequestMapping(value = "/queryCustNum", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public JSONObject queryCustNum(@ApiParam("客商基础信息") @RequestBody JSONObject jsonParams){
+    public JSONObject queryCustNum(@ApiParam("客商基础信息") @RequestBody JSONObject jsonParamsOrg){
+        JSONObject jsonParams=jsonParamsOrg.getJSONObject("data");
         System.out.println(jsonParams.toJSONString());
         JSONObject infos = new JSONObject();
         //检查参数cmpName|supplierclass|iscustomer是否都存在

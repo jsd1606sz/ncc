@@ -22,7 +22,7 @@ public class SmsServiceImpl implements SmsService{
         JSONObject info = new JSONObject();
         String password = EncodeByMD5.encodeByMD5("123456");
         System.out.println("密码123456通过MD5加密后为:"+password);
-        String msgInfo = json.getString("msgInfo");
+        String msgInfo = json.getString("msginfo");
         String msgContent = "【绿城装饰】审批完结:" + msgInfo;
         String mobile = json.getString("mobile");
         String url = conn.getSmsUrl()+"?action=send&userid=&account=gtlczs&password="+password
